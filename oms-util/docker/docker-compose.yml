@@ -4,45 +4,6 @@ version: "3.2"
 #TODO: maybe add also the web interfaces for postgre, mongo, whichever?
 services:
 
-### OMS TUNNEL        #######################################
-### Proxy container #######################################
-
-    traefik:
-        build:
-          context: ./$PATH_OMS_GLOBAL/traefik/
-          dockerfile: ./Dockerfile.dev
-        image: aegee/traefik:dev
-        restart: always
-        ports:
-          - 80:80
-          - 443:443
-          - 8080
-        volumes:
-          - /var/run/docker.sock:/var/run/docker.sock:ro
-#        networks:
-#          - management
-        labels:
-          - traefik.enable=true
-          - traefik.backend=traefik
-          - traefik.port=8080
-          - traefik.frontend.rule=HostRegexp:{domain:traefik.[a-z0-9.]+}
-          - traefik.frontend.priority=20
-          
-    portal:
-        build:
-          context: ./$PATH_OMS_GLOBAL/portal/
-          dockerfile: ./Dockerfile.dev
-        image: aegee/portal:dev
-        restart: always
-        ports:
-          - 9876:80
-        labels:
-          - traefik.enable=true
-          - traefik.backend=portal
-          #- traefik.port=9876
-          - traefik.frontend.rule=HostRegexp:{domain:portal.[a-z0-9.]+}
-          - traefik.frontend.priority=20
-
 ### DB admin (UIs) Containers #######################################
 
 ### pgAdmin Container #######################################
@@ -121,7 +82,6 @@ services:
 # 
 # volumes:
 #   upload:
-
 
 networks:
   default:
