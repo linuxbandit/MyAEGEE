@@ -19,3 +19,6 @@
 [submodule "oms-global/docker/portal/files"]
 	path = oms-global/docker/portal/files
 	url = https://github.com/AEGEE/AEGEEPortal
+[submodule "oms-monitor"]
+	path = oms-monitor
+	url = https://github.com/deviantony/docker-elk.git
