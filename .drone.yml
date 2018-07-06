@@ -1,0 +1,15 @@
+pipeline:
+  oms-core:
+    image: aegee/oms-core
+    commands:
+      - mix test
+  oms-events:
+    image: aegee/oms-events
+    commands:
+      - npm test
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
