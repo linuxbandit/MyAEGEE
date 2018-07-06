@@ -1,15 +1,22 @@
 pipeline:
   oms-core:
     image: aegee/oms-core
+    environment:
+        JWT_ISSUER: OMS
+        JWT_SECRET_KEY_FILE: /run/secrets/jwt_key
+        SENDGRID_KEY_FILE: /run/secrets/sendgrid_key
+        DB_HOST: postgres-oms-core-elixir
     commands:
+      - sleep 70
       - mix test
   oms-events:
     image: aegee/oms-events
     commands:
+      - sleep 70
       - npm test
 
 services:
-  postgres:
+  postgres-oms-core-elixir:
     image: postgres:latest
     environment:
       - POSTGRES_USER=postgres
