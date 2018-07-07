@@ -7,7 +7,8 @@ pipeline:
         SENDGRID_KEY_FILE: /run/secrets/sendgrid_key
         DB_HOST: postgres-oms-core-elixir
     commands:
-      - sleep 70
+      - sleep 20
+      - ls -la
       - mix test
   oms-events:
     image: aegee/oms-events
