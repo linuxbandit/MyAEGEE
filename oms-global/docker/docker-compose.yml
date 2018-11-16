@@ -28,7 +28,32 @@ services:
           - traefik.frontend.rule=HostRegexp:{domain:traefik.[a-z0-9.]+}
           - traefik.frontend.priority=20
           - traefik.frontend.auth.basic=admin:$$2y$$05$$xyGGmUIFoXSDXjBQ10gc7uIjinlWrIZxCmjZ6OGDwoqWk605lCPxi
-
+    
+    cachet:
+       build:
+         context: ./$PATH_OMS_GLOBAL/cachet/
+         args:
+           - cachet_ver=v2.3.15
+       expose:
+         - 8000
+       environment:
+         - DB_DRIVER=pgsql
+         - DB_HOST=postgres-oms-core-elixir
+         - DB_PORT=5432
+         - DB_DATABASE=postgres
+         - DB_USERNAME=postgres
+         - DB_PASSWORD=postgres
+         - DB_PREFIX=chq_
+         - APP_KEY=${APP_KEY:-null}
+         - APP_LOG=errorlog
+         - DEBUG=false
+       labels:
+         - traefik.enable=true
+         - traefik.backend=cachet
+         - traefik.port=8000
+         - traefik.frontend.rule=HostRegexp:{domain:status.[a-z0-9.]+}
+         - traefik.frontend.priority=20
+    
     portal:
         build:
           context: ./$PATH_OMS_GLOBAL/portal/
