@@ -68,7 +68,4 @@ secrets:
         file: secrets/cert.pem
     https_key:
         file: secrets/key.pem
-    mail_user:
-        file: secrets/sendgrid_key
-    mail_password:
-        file: secrets/sendgrid_key
+    
