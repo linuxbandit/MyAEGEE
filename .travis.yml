@@ -8,7 +8,6 @@ services:
   - docker
 
 script:
-    - bash ./vagrant-post-script/generate_secrets.sh
     - bash ./helper.sh -v --init
     - bash ./helper.sh -v --build
     - bash ./helper.sh --start
